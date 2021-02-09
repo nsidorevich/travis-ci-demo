@@ -18,6 +18,7 @@ public class DemoTest {
     @Test
     @DisplayName("First")
     public void firstTest() {
+        System.out.println("TEEEEEEEST");
         for (int i = 0; i < 10; i++) {
             log.info("Here goes my log record captured at {}", System.currentTimeMillis());
         }
