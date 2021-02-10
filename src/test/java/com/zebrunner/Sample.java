@@ -11,10 +11,7 @@ public class Sample {
     @Test
     public void test() {
         Map<String, String> envVars = System.getenv();
-        envVars.entrySet()
-               .stream()
-               .sorted()
-               .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+        envVars.forEach((key, value) -> System.out.println(key + ": " + value));
         assertEquals(true, true);
     }
 
