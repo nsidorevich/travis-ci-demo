@@ -1,55 +1,32 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
-
-parameters:
-  zebrunner-context:
-    default: latest
-    type: string
+version: 2.1
 
 jobs:
   build:
-#    parameters:
-#      ZEBRUNNER_CONTEXT:
-#        default: "TEST"
-#        type: string
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-#        environment:
-#          ZEBRUNNER_CONTEXT: my-value-1
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
 
     working_directory: ~/repo
 
     environment:
-      # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
-      ZEBRUNNER_CONTEXT: "<< pipeline.parameters.zebrunner-context >>"
+      IMAGETAG: "<< pipeline.parameters.image-tag >>"
 
     steps:
+      - run: echo "Image tag used was ${IMAGETAG}"
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
       - run: gradle dependencies
-
       - save_cache:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-
-      # run tests!
       - run: gradle test
+
+parameters:
+  image-tag:
+    default: latest
+    type: string
