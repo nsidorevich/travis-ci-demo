@@ -28,4 +28,5 @@ jobs:
 
 parameters:
   rerun-context:
+    default: ""
     type: string
