@@ -10,10 +10,10 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
-      IMAGETAG: "<< pipeline.parameters.image-tag >>"
+      ZEBRUNNER_CONTEXT: "<< pipeline.parameters.image-tag >>"
 
     steps:
-      - run: echo "Image tag used was ${IMAGETAG}"
+      - run: echo "Image tag used was ${ZEBRUNNER_CONTEXT}"
       - checkout
       - restore_cache:
           keys:
