@@ -3,12 +3,18 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
+
+parameters:
+  zebrunner-context:
+    default: latest
+    type: string
+
 jobs:
   build:
-    parameters:
-      ZEBRUNNER_CONTEXT:
-        default: "TEST"
-        type: string
+#    parameters:
+#      ZEBRUNNER_CONTEXT:
+#        default: "TEST"
+#        type: string
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -26,6 +32,7 @@ jobs:
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
+      ZEBRUNNER_CONTEXT: "<< pipeline.parameters.zebrunner-context >>"
 
     steps:
       - checkout
