@@ -5,11 +5,15 @@
 version: 2
 jobs:
   build:
+    parameters:
+      ZEBRUNNER_CONTEXT:
+        default: "TEST"
+        type: string
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-        environment:
-          ZEBRUNNER_CONTEXT: my-value-1
+#        environment:
+#          ZEBRUNNER_CONTEXT: my-value-1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
