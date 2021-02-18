@@ -14,7 +14,7 @@ public class Sample {
         Map<String, String> envVars = new TreeMap<>(System.getenv());
         envVars.forEach((key, value) -> System.out.println(key + ": " + value));
         assertEquals(true, true);
-        System.out.println("HI");
+        System.out.println("HI2");
     }
 
 }
